@@ -3,27 +3,45 @@ import "./styleCarrouselPage1.css";
 import { Carousel } from "react-bootstrap";
 
 class CarrouselPage1 extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
   render() {
     return (
-      <div>
+      <div className="carousel">
         <Carousel>
           <Carousel.Item>
-            <img className="d-block w-100" alt="picture1" src="Photo1.gif" />
-            <Carousel.Caption>
-              <h3>Chardonnais</h3>
+            <img
+              id="imgCarousel"
+              className="d-block w-100 propsImg1"
+              alt="picture1"
+              src={this.props.propsImg1}
+            />
+            <Carousel.Caption className="classCaption propsCaption">
+              {this.props.propsCaption}
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="d-block w-100" alt="picture2" src="Photo2.gif" />
-            <Carousel.Caption>
-              <h3>Chardonnais</h3>
+            <img
+              id="imgCarousel"
+              className="d-block w-100 propsImg2"
+              alt="picture2"
+              src={this.props.propsImg2}
+            />
+            <Carousel.Caption className="classCaption propsCaption">
+              {this.props.propsCaption}
             </Carousel.Caption>
           </Carousel.Item>
           <Carousel.Item>
-            <img className="d-block w-100" alt="picture3" src="Photo2.gif" />
-
-            <Carousel.Caption>
-              <h3>Chardonnais</h3>
+            <img
+              id="imgCarousel"
+              className="d-block w-100 propsImg3"
+              alt="picture3"
+              src={this.props.propsImg3}
+            />
+            <Carousel.Caption className="classCaption propsCaption">
+              {this.props.propsCaption}
             </Carousel.Caption>
           </Carousel.Item>
         </Carousel>

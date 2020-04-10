@@ -1,20 +1,54 @@
-.detailPage1 {
-}
-.scoring {
-}
-.description {
-}
-.equipment {
-}
-.learnMore {
+/*.colNote {
+  color: #570000;
+  text-align: right;
 }
 
-/*      <div className="detailPage1">
-        <div className="scoring">Note / 5</div>
-        <p className="description">
-          <strong>Le Chardonnais :</strong>
-          <br></br>Superbe appartement de 45m², situé au premier étage
-        </p>
-        <p className="equipment">2 voyageurs . 1 lit . 1 salle de bain</p>
-        <div className="learnMore">
-          <BoutonPage1 />*/
+.colTitle {
+  color: #570000;
+}
+
+.colDescription {
+  color: #570000;
+}
+*/
+
+.colNote {
+  color: #570000;
+  text-align: right;
+  padding-right: 5px;
+}
+
+.colTitle {
+  color: #570000;
+  font-weight: 500;
+  font-size: 22px;
+  margin: 0;
+  padding: 0;
+  padding-right: 5px;
+}
+
+.rowDescription {
+  height: 100px;
+  max-height: 100px;
+  overflow: hidden;
+}
+
+.colDescription {
+  color: #570000;
+  margin: 0;
+  padding-right: 5px;
+}
+
+.colCharacteristics {
+  color: #570000;
+  height: 53px;
+  max-height: 53px;
+  padding-right: 5px;
+  margin-top: 6px;
+}
+
+.colMore {
+  text-align: right;
+  padding-right: 5px;
+  margin-top: 2px;
+}

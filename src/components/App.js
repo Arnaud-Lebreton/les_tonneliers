@@ -9,27 +9,27 @@ import BodyPage1 from "../components/bodyPage1/BodyPage1";
 import Page2 from "../components/Page2/Page2";
 
 class App extends Component {
-    render() {
-        return (
-            <Router>
-                <Menu />
+  render() {
+    return (
+      <Router>
+        <Menu />
 
-                <div className="content">
-                    <Switch>
-                        <Route path="/page2">
-                            <Page2 />
-                        </Route>
+        <div className="content">
+          <Switch>
+            <Route path="/page2">
+              <Page2 />
+            </Route>
 
-                        <Route path="/">
-                            <BodyPage1 />
-                        </Route>
-                    </Switch>
-                </div>
+            <Route path="/">
+              <BodyPage1 />
+            </Route>
+          </Switch>
+        </div>
 
-                <Footer />
-            </Router>
-        );
-    }
+        <Footer />
+      </Router>
+    );
+  }
 }
 
 export default App;
