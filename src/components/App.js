@@ -6,30 +6,28 @@ import Menu from "./Menu/Menu";
 import Footer from "./Footer/Footer";
 import {} from "react-bootstrap";
 import BodyPage1 from "../components/bodyPage1/BodyPage1";
-import Page2 from "../components/Page2/Page2";
+import Contact from "../components/Contact/Contact";
 
 class App extends Component {
-    render() {
-        return (
-            <Router>
-                <Menu />
+  render() {
+    return (
+      <Router>
+        <Menu />
 
-                <div className="content">
-                    <Switch>
-                        <Route path="/page2">
-                            <Page2 />
-                        </Route>
+        <div className="content">
+          <Switch>
+            <Route path="/">
+              <BodyPage1 />
+            </Route>
+          </Switch>
+          <h2>Nous Contacter</h2>
+          <Contact />
+        </div>
 
-                        <Route path="/">
-                            <BodyPage1 />
-                        </Route>
-                    </Switch>
-                </div>
-
-                <Footer />
-            </Router>
-        );
-    }
+        <Footer />
+      </Router>
+    );
+  }
 }
 
 export default App;

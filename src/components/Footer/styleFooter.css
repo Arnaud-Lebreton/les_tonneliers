@@ -1,36 +1,37 @@
 .footer {
-  position: fixed;
-  display: grid;
+  position: relative;
   bottom: 0px;
   left: 0px;
   right: 0px;
   background-color: #d4d4d4;
-  height: 300px;
+  width: 100%;
 }
 
+.footer .row {
+  background-color: #d4d4d4;
+}
 .footer .social_network img {
-  width: 70px;
+  width: 50px;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
+  padding-top: 12px;
 }
 
-.footer .social_network:hover img {
+.footer .social_network img:hover {
   -webkit-transform: rotate(-25deg);
   transform: rotate(-25deg);
 }
 
-.footer #logo_footer {
-  
-}
-
 .footer #logo_footer img {
-  width: 250px;
-}
-
-.footer #logo_ville_footer {
-  
+  width: 150px;
+  padding-top: 12px;
 }
 
 .footer #logo_ville_footer img {
-  width: 250px;
+  width: 150px;
+}
+
+.footer .col {
+  text-align: center;
+  align-items: center;
 }
