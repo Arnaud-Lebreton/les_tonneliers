@@ -16,7 +16,7 @@ class App extends Component {
 
                 <div className="content">
                     <Switch>
-                        <Route exact path="/page2">
+                        <Route path="/page2">
                             <Page2 />
                         </Route>
 
