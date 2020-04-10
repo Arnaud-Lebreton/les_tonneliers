@@ -1,0 +1,30 @@
+.bodyPage1 {
+  font-family: "Josefin Sans", sans-serif;
+}
+
+.bodyPage1 .headerPage1 {
+}
+.bodyPage1 .headerPage1 img {
+  height: 200px;
+}
+.bodyPage1 h1 {
+  border: 2px solid blue;
+  text-align: center;
+  color: rgb(148, 23, 30);
+  width: 90%;
+  margin: 0 auto;
+}
+.bodyPage1 h3 {
+  border: 2px solid red;
+  color: rgb(148, 23, 30);
+  text-align: center;
+  width: 90%;
+  margin: 0 auto;
+}
+.bodyPage1 h4 {
+  border: 2px solid red;
+  color: rgb(148, 23, 30);
+  text-align: center;
+  width: 90%;
+  margin: 0 auto;
+}
