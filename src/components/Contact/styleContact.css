@@ -41,6 +41,24 @@ textarea {
   display: flex;
 }
 
-.row {
+#form .row {
   background-color: transparent;
+  margin: 0 50px;
+}
+
+.reserve {
+  text-align: center;
+}
+h1,
+.reserve h1,
+span {
+  color: #9a1e27;
+  text-decoration: underline;
+}
+.reserve img {
+  max-width: inherit;
+  max-height: 350px;
+  margin: 20px 0;
+  border-radius: 10px;
+  box-shadow: 5px 5px 5px 5px #d4d4d4;
 }

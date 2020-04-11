@@ -3,7 +3,7 @@ import "./style.css";
 
 class Page2 extends Component {
     render() {
-        return <div>Hello</div>;
+        return <div></div>;
     }
 }
 

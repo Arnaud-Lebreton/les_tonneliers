@@ -20,7 +20,7 @@ class App extends Component {
               <BodyPage1 />
             </Route>
           </Switch>
-          <h2>Nous Contacter</h2>
+          
           <Contact />
         </div>
 
