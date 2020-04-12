@@ -7,6 +7,7 @@ import Footer from "./Footer/Footer";
 import {} from "react-bootstrap";
 import BodyPage1 from "../components/bodyPage1/BodyPage1";
 import Contact from "../components/Contact/Contact";
+import BodyPage2 from "./bodyPage2/BodyPage2";
 
 class App extends Component {
   render() {
@@ -19,8 +20,11 @@ class App extends Component {
             <Route path="/">
               <BodyPage1 />
             </Route>
+            <Route path="/">
+              <BodyPage2 />
+            </Route>
           </Switch>
-          
+
           <Contact />
         </div>
 
