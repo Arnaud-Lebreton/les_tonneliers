@@ -13,8 +13,8 @@ class GridPage1 extends Component {
     return (
       <div>
         <Container>
-          <Row>
-            <Col className="propsCaption propsImg1 propsImg2 propsImg3">
+          <Row className="rowGrid">
+            <Col className="colGrid propsCaption propsImg1 propsImg2 propsImg3">
               <CarrouselPage1
                 propsCaption={this.props.propsCaption}
                 propsImg1={this.props.propsImg1}
@@ -22,7 +22,7 @@ class GridPage1 extends Component {
                 propsImg3={this.props.propsImg3}
               />
             </Col>
-            <Col className="propsNote propsTiltle propsDescription propsCharacteristics">
+            <Col className=" colGrid propsNote propsTiltle propsDescription propsCharacteristics">
               <DetailPage1
                 propsNote={this.props.propsNote}
                 propsTiltle={this.props.propsTiltle}
