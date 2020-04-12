@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./styleContact.css";
 import { Row, Col } from "react-bootstrap";
+import BoutonPage1 from "../../assets/boutons/BoutonPage1";
 
 class Contact extends Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class Contact extends Component {
       <div id="form">
         <Row>
           <Col>
+            <h1>Nous Contacter</h1>
             <form className="formulaire">
               <label for="firstname">Prénom</label>
               <input
@@ -74,7 +76,31 @@ class Contact extends Component {
               </a>
             </form>
           </Col>
-          <Col></Col>
+          <Col className="reserve">
+            <h1>Réserver votre appartement</h1>
+            <br />
+            <p>
+              Pour réserver un de nos appartements, contactez nous directement
+              par Téléphone ou via le formulaire
+            </p>
+            <p>
+              Résidence Les Tonneliers
+              <br />7 Rue des Tonneliers
+              <br />
+              21200 Beaune, France
+            </p>
+            <p>
+              <span>Tel :</span> (+33) 07.60.40.65.49 <br />
+              <span>Email :</span> contact@lestonneliers.fr
+            </p>
+            <a
+              href="https://www.google.com/maps/place/7+Rue+des+Tonneliers,+21200+Beaune/@47.0243942,4.837084,17z/data=!3m1!4b1!4m5!3m4!1s0x47f2f345f565f3ff:0x899fbdaa48d90ae4!8m2!3d47.0243942!4d4.8392727"
+              target="blank"
+            >
+              <BoutonPage1 button="Plan d'accès et Itinéraire" />
+            </a>
+            <img src="img/map_beaune.png" alt="map_beaune" />
+          </Col>
         </Row>
       </div>
     );

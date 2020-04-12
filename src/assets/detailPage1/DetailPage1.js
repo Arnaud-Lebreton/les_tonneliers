@@ -30,7 +30,7 @@ class DetailPage1 extends Component {
           </Row>
           <Row className="rowMore">
             <Col className="colMore">
-              <BoutonPage1 />
+              <BoutonPage1 button="En savoir plus" />
             </Col>
           </Row>
         </Container>
