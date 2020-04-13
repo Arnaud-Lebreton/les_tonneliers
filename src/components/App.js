@@ -17,14 +17,12 @@ class App extends Component {
         <div className="content">
           <Switch>
             <Route path="/">
-              {/*<BodyPage1 />*/}
-              <BodyPage2 />
+              <BodyPage1 />
             </Route>
             <Route path="/">
               <BodyPage2 />
             </Route>
           </Switch>
-
           <Contact />
         </div>
         <Footer />

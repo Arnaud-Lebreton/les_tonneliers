@@ -5,16 +5,13 @@ import Button from "react-bootstrap/Button";
 import BoutonPage2 from "../../assets/boutons/BoutonPage2";
 import Calendar1 from "../../assets/calendar/Calendar1";
 import ModalCalendar from "../../assets/modal/ModalCalendar";
-import { Modal } from "react-bootstrap";
 
 class GridPage2 extends Component {
   constructor(props) {
     super(props);
     this.state = {
       show: false,
-      arrivalDate: 0,
-      departureDate: 0,
-      traveler: 1,
+      traveler: 0,
       night: 0,
       cleaning: 0,
       service: 0,
@@ -22,16 +19,92 @@ class GridPage2 extends Component {
       total: 0,
       overnightTotalCoast: 0,
     };
-    this.initPrice = 368;
+    this.initPrice = 200;
     this.initCleaning = 10;
-    this.initService = 20;
+    this.initService = 10;
     this.InitTouristTax = 20;
+    this.arrivalDate = 0;
+    this.departureDate = 0;
+    this.calculDate = 0;
   }
-  /*calculation of the number of travelers*/
-  /*calcul du nombre de voyageurs*/
+  /*
+  /*calculation of the number of nights
+  /*Calcul du nombre de nuit
+  */
+  /*recovery of data entry - récupération de la saisie de donnée*/
+  getNight = (e) => {
+    let nameDate = e.target.name;
+    let valDate = e.target.value;
+    //formatting the date entry - Formatage de saisie de date
+    if (valDate.length == 2) {
+      e.target.value = valDate + "/";
+    } else if (valDate.length == 5) {
+      e.target.value = valDate + "/";
+    }
+    //dates formatting - Formatage des dates aaaa-mm-dd
+    if (valDate.length == 10) {
+      let calculJour = valDate.substr(0, 2);
+      let calculMois = valDate.substr(3, 2);
+      let calculAnnee = valDate.substr(6, 4);
+      this.calculDate = calculAnnee + "-" + calculMois + "-" + calculJour;
+      if (nameDate == "arrivee") {
+        this.arrivalDate = this.calculDate;
+      } else if (nameDate == "depart") {
+        this.departureDate = this.calculDate;
+      }
+      //dates formatting - Formatage des dates
+      if (this.arrivalDate != 0 && this.departureDate != 0) {
+        this.calculNight(e, this.arrivalDate, this.departureDate);
+      }
+    }
+  };
+
+  /*calculation of the number of nights - Calcul du nombre de nuits*/
+  calculNight = (e, dateA, dateB) => {
+    let date1 = new Date(dateA);
+    let date2 = new Date(dateB);
+    let diff = this.dateDiff(date1, date2);
+    let nNight = diff.day;
+    if (nNight < 0) {
+      alert("Attention, la date de départ est inférieure à la date d'arrivée");
+      e.target.value = "";
+    } else {
+      this.state.night = nNight;
+      this.setState({ night: nNight });
+      this.coast();
+    }
+  };
+  /*Calcul du nombre de jour entre 2 dates*/
+  dateDiff = (date1, date2) => {
+    let diff = {}; // Initialisation du retour
+    let tmp = date2 - date1;
+
+    tmp = Math.floor(tmp / 1000); // Nombre de secondes entre les 2 dates
+    diff.sec = tmp % 60; // Extraction du nombre de secondes
+
+    tmp = Math.floor((tmp - diff.sec) / 60); // Nombre de minutes (partie entière)
+    diff.min = tmp % 60; // Extraction du nombre de minutes
+
+    tmp = Math.floor((tmp - diff.min) / 60); // Nombre d'heures (entières)
+    diff.hour = tmp % 24; // Extraction du nombre d'heures
+
+    tmp = Math.floor((tmp - diff.hour) / 24); // Nombre de jours restants
+    diff.day = tmp;
+
+    return diff;
+  };
+
+  //
+  //
+  //
+  //
+
+  /*calculation of the number of travelers
+  /*calcul du nombre de voyageurs
+  */
   nTraveler = (e) => {
     let n = this.state.traveler;
-    if (e.target.name == "plus") {
+    if (e.target.name == "plus" && n < 6) {
       n++;
     } else if (e.target.name == "moins" && n > 1) {
       n--;
@@ -40,14 +113,10 @@ class GridPage2 extends Component {
     this.setState({ traveler: n });
     this.coast();
   };
-
-  overnight = () => {
-    let nNight = 2;
-    this.setState({ night: nNight });
-  };
-
-  /*calculate total cost overnight*/
-  /*calcul le cout total nuité */
+  /*
+  /*calculate total cost overnight
+  /*calcul le cout total nuité 
+  */
   coast = () => {
     //Calcul du prix chambre * nombre de nuit
     let cout1 = this.initPrice * this.state.night;
@@ -70,22 +139,6 @@ class GridPage2 extends Component {
     this.state.total = cout5;
     this.setState({ total: cout5 });
   };
-  //
-  //
-  //Essai lance modal
-  test1 = () => {
-    this.setState({ show: !this.state.show });
-  };
-
-  test = () => {
-    if (this.state.show) {
-      return <ModalCalendar />;
-    }
-  };
-  //
-  //
-  //
-  //
 
   render() {
     return (
@@ -102,24 +155,27 @@ class GridPage2 extends Component {
               <label className="labelGrid2" for="arrivee">
                 Date d'arrivée :
               </label>
+
               <input
                 className="InputGrid2 arrivalDate"
                 type="text"
                 name="arrivee"
-                placeholder="date arrivée"
-                onClick={this.overnight}
+                placeholder="jj/mm/aaaa"
+                maxlength="10"
+                onChange={this.getNight}
               ></input>
             </Col>
             <Col className="cont1Row1Col2Grid2">
-              <label className="labelGrid2" for="depart">
+              <label className="labelGrid2 " for="depart">
                 Date de départ :
               </label>
               <input
                 className="InputGrid2"
                 type="text"
                 name="depart"
-                placeholder="date de départ"
-                onClick={this.coast}
+                placeholder="jj/mm/aaaa"
+                maxlength="10"
+                onChange={this.getNight}
               ></input>
             </Col>
           </Row>
@@ -200,7 +256,7 @@ class GridPage2 extends Component {
           <Row className="cont1Row9Grid2">
             <Col className="cont1Row9Col1Grid2">
               <BoutonPage2 />
-              <button onClick={this.test1}>test</button>
+              <button value="open">test</button>
             </Col>
           </Row>
         </Container>

@@ -22,7 +22,7 @@ class GridPage1 extends Component {
                 propsImg3={this.props.propsImg3}
               />
             </Col>
-            <Col className=" colGrid propsNote propsTiltle propsDescription propsCharacteristics">
+            <Col className=" colGrid propsNote propsTiltle propsDescription propsCharacteristics ">
               <DetailPage1
                 propsNote={this.props.propsNote}
                 propsTiltle={this.props.propsTiltle}
