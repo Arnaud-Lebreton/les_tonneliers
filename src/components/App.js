@@ -8,7 +8,6 @@ import {} from "react-bootstrap";
 import BodyPage1 from "../components/bodyPage1/BodyPage1";
 import BodyPage2 from "../components/bodyPage2/BodyPage2";
 import Contact from "../components/Contact/Contact";
-import BodyPage2 from "./bodyPage2/BodyPage2";
 
 class App extends Component {
   render() {
@@ -18,8 +17,8 @@ class App extends Component {
         <div className="content">
           <Switch>
             <Route path="/">
-              <BodyPage1 />
-              {/*<BodyPage2 />*/}
+              {/*<BodyPage1 />*/}
+              <BodyPage2 />
             </Route>
             <Route path="/">
               <BodyPage2 />
