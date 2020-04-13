@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import "./styleBodyPage2.css";
 import GridPage2 from "../../assets/grids/GridPage2";
-
+import GridDetails from "../../assets/grids/GridDetails";
+import ApartmentLink from "../../assets/apartmentLink/apartmentLink";
 class BodyPage2 extends Component {
   constructor(props) {
     super(props);
@@ -9,8 +10,14 @@ class BodyPage2 extends Component {
   }
   render() {
     return (
-      <div className="bodyPage2">
-        <GridPage2 />
+      <div>
+        <div className="bodyPage2">
+          <GridDetails />
+          <GridPage2 />
+        </div>
+        <div className="apartmentlink">
+          <ApartmentLink />
+        </div>
       </div>
     );
   }
