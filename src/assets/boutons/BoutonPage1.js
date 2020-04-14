@@ -11,7 +11,7 @@ class BoutonPage1 extends Component {
 
   test = () => {
     console.log("test");
-    return <BodyPage2 />;
+    return (window.location.href = "http://localhost:3000/page2");
   };
 
   render() {

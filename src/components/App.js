@@ -16,10 +16,10 @@ class App extends Component {
         <Menu />
         <div className="content">
           <Switch>
-            <Route path="/">
+            <Route path="/" exact>
               <BodyPage1 />
             </Route>
-            <Route path="/">
+            <Route path="/page2">
               <BodyPage2 />
             </Route>
           </Switch>

@@ -93,12 +93,7 @@ class GridPage2 extends Component {
 
     return diff;
   };
-
-  //
-  //
-  //
-  //
-
+  /*
   /*calculation of the number of travelers
   /*calcul du nombre de voyageurs
   */
@@ -138,6 +133,14 @@ class GridPage2 extends Component {
     let cout5 = cout1 + cout2 + cout3 + cout4;
     this.state.total = cout5;
     this.setState({ total: cout5 });
+  };
+  /*
+  /*-
+  /*Lance le modal
+  */
+  lanceModal = () => {
+    console.log("test");
+    return <ModalCalendar />;
   };
 
   render() {
@@ -256,7 +259,14 @@ class GridPage2 extends Component {
           <Row className="cont1Row9Grid2">
             <Col className="cont1Row9Col1Grid2">
               <BoutonPage2 />
-              <button value="open">test</button>
+              <button
+                className="buttonModal"
+                value="open"
+                onClick={this.lanceModal}
+              >
+                test
+              </button>
+              <div>{this.lanceModal()}</div>
             </Col>
           </Row>
         </Container>

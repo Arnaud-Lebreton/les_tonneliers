@@ -7,10 +7,11 @@ class CarrouselPage1 extends Component {
     super(props);
     this.state = {};
   }
+
   render() {
     return (
       <div className="carousel">
-        <Carousel>
+        <Carousel interval={null}>
           <Carousel.Item>
             <img
               id="imgCarousel"
@@ -25,7 +26,7 @@ class CarrouselPage1 extends Component {
           <Carousel.Item>
             <img
               id="imgCarousel"
-              className="d-block w-100 propsImg2"
+              className="d-block w-100  propsImg2"
               alt="picture2"
               src={this.props.propsImg2}
             />
@@ -36,7 +37,7 @@ class CarrouselPage1 extends Component {
           <Carousel.Item>
             <img
               id="imgCarousel"
-              className="d-block w-100 propsImg3"
+              className="d-block w-100  propsImg3"
               alt="picture3"
               src={this.props.propsImg3}
             />
