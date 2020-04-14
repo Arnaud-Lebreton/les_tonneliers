@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./styleBodyPage1.css";
 import GridPage1 from "../../assets/grids/GridPage1";
+import Contact from "../Contact/Contact";
 
 class BodyPage1 extends Component {
   constructor(props) {
@@ -68,6 +69,9 @@ class BodyPage1 extends Component {
             propsDescription="Description4"
             propsCharacteristics="Caractéristique4"
           />
+        </div>
+        <div className="contact_component">
+          <Contact />
         </div>
       </div>
     );

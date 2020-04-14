@@ -14,6 +14,9 @@ class Footer extends Component {
           </Col>
           <Col>
             <div className="social_network">
+              <p>Résidence Les Tonneliers</p>
+              <p>7 rue des Tonneliers</p>
+              <p>21200 Beaune, FRANCE</p>
               <a href="https://fr-fr.facebook.com/">
                 <img src="./img/ico_facebook.svg" alt="ico_facebook" />
               </a>

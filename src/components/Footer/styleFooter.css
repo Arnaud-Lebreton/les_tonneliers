@@ -10,14 +10,11 @@
 
 .footer .social_network img {
   width: 50px;
-  -webkit-transition: all 0.5s ease;
-  transition: all 0.5s ease;
   padding-top: 12px;
 }
 
 .footer .social_network img:hover {
-  -webkit-transform: rotate(-25deg);
-  transform: rotate(-25deg);
+  opacity: 0.5;
 }
 
 .footer #logo_footer img {
@@ -33,4 +30,10 @@
 .footer .col {
   text-align: center;
   align-items: center;
+}
+
+.social_network p {
+  color: #570000;
+  line-height: 0.5rem;
+  margin-top: 15px;
 }
