@@ -24,6 +24,11 @@ class Menu extends Component {
           onClick={this.changeShow}
         >
           <Nav.Item>
+            <Nav.Link href="/" eventKey="home">
+              Accueil
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
             <Login />
           </Nav.Item>
           <NavDropdown title="Les Tonneliers" id="nav-dropdown">
