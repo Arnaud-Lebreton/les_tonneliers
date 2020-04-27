@@ -4,8 +4,36 @@ import { Col } from "react-bootstrap";
 import CarrouselPage1 from "../caroussel/CarrouselPage1";
 import Equipment from "../../components/Equipment/Equipment";
 
-
 class GridDetails extends Component {
+  // Appel aux données
+  componentDidMount() {
+    //le 1er affichage de la page
+    this.getAppartement();
+  }
+
+  getAppartement = () => {
+    const options = {
+      method: "GET",
+      headers: { "Content-type": "application/json" },
+      mode: "cors",
+    };
+    fetch(
+      "http://localhost:8080/appartement/detailsappartement?id=" + //envoie du paramètre de recherche dans le chemin
+        this.props.idAppartement,
+      options
+    )
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          this.setState({ dataDetailAppartement: data });
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  };
+
   render() {
     return (
       <div>

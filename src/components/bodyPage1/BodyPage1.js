@@ -6,8 +6,49 @@ import Contact from "../Contact/Contact";
 class BodyPage1 extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      dataAppartement: [],
+    };
   }
+  // Appel aux données
+  componentDidMount() {
+    //le 1er affichage de la page
+    this.getAppartement();
+  }
+
+  getAppartement = () => {
+    const options = {
+      method: "GET",
+      headers: { "Content-type": "application/json" },
+      mode: "cors",
+    };
+    fetch("http://localhost:8080/appartement/", options)
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          this.setState({ dataAppartement: data });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  };
+
+  afficherGrid = () => {
+    return this.state.dataAppartement.map((element, index) => (
+      <GridPage1
+        propsCaption={element.nomApp}
+        propsImg1={element.imgApp[0]}
+        propsImg2={element.imgApp[1]}
+        propsImg3={element.imgApp[2]}
+        propsNote={element.noteApp}
+        propsTiltle={element.nomApp}
+        propsDescription={element.descPage1App}
+        propsCharacteristics={element.caracApp}
+      />
+    ));
+  };
+
   render() {
     return (
       <div className="bodyPage1">
@@ -25,50 +66,7 @@ class BodyPage1 extends Component {
           <a className="classRetour" href="#navbar">
             <img src="/img/retour.svg" alt="Retour" />
           </a>
-
-          <GridPage1
-            propsCaption="Le Corton Charlemagne"
-            propsImg1="/img/p7.jpg"
-            propsImg2="/img/P1.jpg"
-            propsImg3="/img/p2.jpg"
-            propsNote="Note : 4/5"
-            propsTiltle="Le Corton Charlemagne"
-            propsDescription="Description1"
-            propsCharacteristics="Caractéristique1"
-          />
-          <br></br>
-          <GridPage1
-            propsCaption="Le Montrachet"
-            propsImg1="/img/p7.jpg"
-            propsImg2="/img/p3.jpg"
-            propsImg3="/img/p4.jpg"
-            propsNote="Note : 4/5"
-            propsTiltle="Le Montrachet"
-            propsDescription="Description2"
-            propsCharacteristics="Caractéristique2"
-          />
-          <br></br>
-          <GridPage1
-            propsCaption="Le Clos Saint Denis"
-            propsImg1="/img/p7.jpg"
-            propsImg2="/img/p5.jpg"
-            propsImg3="/img/p6.jpg"
-            propsNote="Note : 4/5"
-            propsTiltle="Le Clos Saint Denis"
-            propsDescription="Description3"
-            propsCharacteristics="Caractéristique3"
-          />
-          <br></br>
-          <GridPage1
-            propsCaption="Le Chambertin"
-            propsImg1="/img/p7.jpg"
-            propsImg2="/img/p10.jpg"
-            propsImg3="/img/p11.jpg"
-            propsNote="Note : 4/5"
-            propsTiltle="Le Chambertin"
-            propsDescription="Description4"
-            propsCharacteristics="Caractéristique4"
-          />
+          {this.afficherGrid()}
         </div>
         <div className="contact_component">
           <Contact />

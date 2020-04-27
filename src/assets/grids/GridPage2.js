@@ -4,12 +4,13 @@ import { Container, Row, Col } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import BoutonPage2 from "../../assets/boutons/BoutonPage2";
 import Calendar1 from "../../assets/calendar/Calendar1";
-import ModalCalendar from "../../assets/modal/ModalCalendar";
 
 class GridPage2 extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      nomApp: "",
+      dataReservation1: [],
       show: false,
       traveler: 0,
       night: 0,
@@ -27,6 +28,33 @@ class GridPage2 extends Component {
     this.departureDate = 0;
     this.calculDate = 0;
   }
+
+  // Appel aux données au clic
+  componentDidMount() {
+    //le 1er affichage de la page
+    this.getReservation();
+  }
+
+  getReservation = () => {
+    const options = {
+      method: "GET",
+      headers: { "Content-type": "application/json" },
+      mode: "cors",
+    };
+    fetch("http://localhost:8080/reservation/", options)
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          this.state.dataReservation1 = data;
+          console.log(data);
+          this.setState({ dataReservation1: data });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  };
+
   /*
   /*calculation of the number of nights
   /*Calcul du nombre de nuit
@@ -136,13 +164,8 @@ class GridPage2 extends Component {
   };
   /*
   /*-
-  /*Lance le modal
+  * Modal de récapitulation :
   */
-  lanceModal = () => {
-    console.log("test");
-    return <ModalCalendar />;
-  };
-
   render() {
     return (
       <div className="gridPage2">
@@ -259,14 +282,6 @@ class GridPage2 extends Component {
           <Row className="cont1Row9Grid2">
             <Col className="cont1Row9Col1Grid2">
               <BoutonPage2 />
-              <button
-                className="buttonModal"
-                value="open"
-                onClick={this.lanceModal}
-              >
-                test
-              </button>
-              <div>{this.lanceModal()}</div>
             </Col>
           </Row>
         </Container>

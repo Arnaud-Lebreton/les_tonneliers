@@ -11,7 +11,7 @@ class GridPage1 extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="classGrid2">
         <Container>
           <Row className="rowGrid">
             <Col className="colGrid propsCaption propsImg1 propsImg2 propsImg3">

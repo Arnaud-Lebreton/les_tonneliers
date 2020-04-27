@@ -18,9 +18,7 @@ class App extends Component {
             <Route path="/" exact>
               <BodyPage1 />
             </Route>
-            <Route path="/page2">
-              <BodyPage2 />
-            </Route>
+            <Route path="/page2/:id" component={BodyPage2} />
           </Switch>
         </div>
         <Footer />
