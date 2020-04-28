@@ -17,7 +17,7 @@ class Calendar1 extends Component {
   };
 
   envoieDate = () => {
-    console.log(this.state.date);
+    //console.log(this.state.date);
     return;
   };
   render() {

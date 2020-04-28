@@ -1,3 +1,7 @@
+/*
+ * Descriptif des appartements associé avec les carrousel - Page1
+ */
+
 import React, { Component } from "react";
 import "./styleDetailPage1.css";
 import { Container, Row, Col } from "react-bootstrap";
@@ -31,7 +35,10 @@ class DetailPage1 extends Component {
           </Row>
           <Row className="rowMore">
             <Col className="colMore">
-              <BoutonPage1 button="En savoir plus" />
+              <BoutonPage1
+                button="En savoir plus"
+                propsIdAppartement={this.props.propsIdAppartement}
+              />
             </Col>
           </Row>
         </Container>

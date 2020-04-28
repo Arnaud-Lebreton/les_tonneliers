@@ -1,11 +1,10 @@
 /*
- * Bouton "En savoir Plus" Page1
+ * Bouton "Plan acces itinéraire" Page1
  */
 
 import React, { Component } from "react";
-import "./styleBoutonPage1.css";
+import "./styleBoutonMap.css";
 import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 class BoutonPage1 extends Component {
   constructor(props) {
@@ -16,9 +15,7 @@ class BoutonPage1 extends Component {
   render() {
     return (
       <div>
-        <Link to={"/page2/" + this.props.propsIdAppartement}>
-          <Button variant="danger">{this.props.button}</Button>
-        </Link>
+        <Button variant="danger">{this.props.button}</Button>
       </div>
     );
   }

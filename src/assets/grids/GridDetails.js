@@ -1,3 +1,8 @@
+/*
+ * Descriptif détaillé d'un appartement- Page2
+ * A finir : voir à mettre dans la collection appartement sous forme de tableau dans "descPage2App"
+ */
+
 import React, { Component } from "react";
 import "./styleGridDetails.css";
 import { Col } from "react-bootstrap";
@@ -5,6 +10,13 @@ import CarrouselPage1 from "../caroussel/CarrouselPage1";
 import Equipment from "../../components/Equipment/Equipment";
 
 class GridDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataDetailAppartement: { imgApp: [], equipApp: [] },
+    };
+  }
+
   // Appel aux données
   componentDidMount() {
     //le 1er affichage de la page
@@ -19,14 +31,14 @@ class GridDetails extends Component {
     };
     fetch(
       "http://localhost:8080/appartement/detailsappartement?id=" + //envoie du paramètre de recherche dans le chemin
-        this.props.idAppartement,
+        this.props.propsIdAppartement,
       options
     )
       .then((res) => res.json())
       .then(
         (data) => {
+          // console.log(data);
           this.setState({ dataDetailAppartement: data });
-          console.log(data);
         },
         (error) => {
           console.log(error);
@@ -39,7 +51,7 @@ class GridDetails extends Component {
       <div>
         <div className="grid_details">
           <Col className="caroussel_col1">
-            <h3>Le Corton Charlemagne</h3>
+            <h3>{this.state.dataDetailAppartement.nomApp}</h3>
             <br />
             <p>
               <span>
@@ -77,14 +89,16 @@ class GridDetails extends Component {
           </Col>
           <Col className="caroussel_col2">
             <CarrouselPage1
-              propsImg1="img/P1.jpg"
-              propsImg2="img/P2.jpg"
-              propsImg3="img/P3.jpg"
+              propsImg1={this.state.dataDetailAppartement.imgApp[0]}
+              propsImg2={this.state.dataDetailAppartement.imgApp[1]}
+              propsImg3={this.state.dataDetailAppartement.imgApp[2]}
             />
           </Col>
         </div>
         <div>
-          <Equipment />
+          <Equipment
+            propsEquipement={this.state.dataDetailAppartement.equipApp}
+          />
         </div>
       </div>
     );

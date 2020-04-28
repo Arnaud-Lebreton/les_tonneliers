@@ -1,3 +1,8 @@
+/*
+ * Affichage et calcul de la réservation - Page2
+ * A finir : le calendrier + la modale de recap + faire un controle de date de reservation
+ */
+
 import React, { Component } from "react";
 import "./styleGridPage2.css";
 import { Container, Row, Col } from "react-bootstrap";
@@ -9,45 +14,71 @@ class GridPage2 extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      nomApp: "",
-      dataReservation1: [],
+      initPrix: 0, // Extraction prix collection app
+      initMenage: 0, // Extraction prix collection frais
+      initService: 0, // Extraction prix collection frais
+      initTaxe: 0, // Extraction prix collection frais
       show: false,
-      traveler: 0,
-      night: 0,
-      cleaning: 0,
+      voyageur: 0,
+      nuit: 0,
+      menage: 0,
       service: 0,
-      touristTax: 0,
+      taxe: 0,
       total: 0,
-      overnightTotalCoast: 0,
+      totalNuite: 0,
     };
-    this.initPrice = 200;
-    this.initCleaning = 10;
-    this.initService = 10;
-    this.InitTouristTax = 20;
-    this.arrivalDate = 0;
-    this.departureDate = 0;
+    this.dateArrivee = 0;
+    this.dateDepart = 0;
     this.calculDate = 0;
   }
 
-  // Appel aux données au clic
+  /*
+   *Extraction des données sur les collections.
+   */
   componentDidMount() {
     //le 1er affichage de la page
-    this.getReservation();
+    this.getAppartement();
+    this.getFrais();
   }
 
-  getReservation = () => {
+  // Extraction des données Collection Appartement => prix
+  getAppartement = () => {
     const options = {
       method: "GET",
       headers: { "Content-type": "application/json" },
       mode: "cors",
     };
-    fetch("http://localhost:8080/reservation/", options)
+    fetch(
+      "http://localhost:8080/reservation?id=" + this.props.propsIdReservation, //envoie du paramètre de recherche dans le chemin
+      options
+    )
       .then((res) => res.json())
       .then(
         (data) => {
-          this.state.dataReservation1 = data;
           console.log(data);
-          this.setState({ dataReservation1: data });
+          this.setState({ initPrix: data.prixNuit });
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  };
+
+  //Extraction frais collection tarifs
+  getFrais = () => {
+    const options = {
+      method: "GET",
+      headers: { "Content-type": "application/json" },
+      mode: "cors",
+    };
+    fetch("http://localhost:8080/reservation/frais", options)
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          console.log(data);
+          this.setState({ initMenage: data.fraisMenage });
+          this.setState({ initService: data.fraisService });
+          this.setState({ initTaxe: data.taxeSejour });
         },
         (error) => {
           console.log(error);
@@ -56,11 +87,54 @@ class GridPage2 extends Component {
   };
 
   /*
-  /*calculation of the number of nights
+   * Enregistrement des données de confirmation de réservation (a mettre dans le modal)
+   */
+  envoiFormulaire = (e) => {
+    e.preventDefault(); //Pour empecher de rafraichir la page
+    // Créer le body à envoyer
+    const body = {
+      nomApp: this.state.nomApp,
+      arrivee: this.dateArrivee,
+      depart: this.dateDepart,
+      nbVoyageurs: this.state.voyageur,
+      totalBrut: this.state.totalNuite,
+      fraisMenage: this.state.menage,
+      fraisService: this.state.service,
+      taxeSejour: this.state.taxe,
+      totalResa: this.state.total,
+      restantDu: this.state.total,
+    };
+
+    //Configuration de la requete
+    const options = {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      body: JSON.stringify(body),
+    };
+    //Envoie de la requete
+    fetch(
+      "http://localhost:8080/reservation?id=5ea34200d6146ef6df3dcace",
+      options
+    )
+      .then((response) => response.json())
+      .then(
+        (data) => {
+          console.log(data);
+          alert("Votre réservation a été prise en compte, merci");
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  };
+
+  /*
+  /*calculation of the number of nuits
   /*Calcul du nombre de nuit
   */
   /*recovery of data entry - récupération de la saisie de donnée*/
-  getNight = (e) => {
+  getnuit = (e) => {
     let nameDate = e.target.name;
     let valDate = e.target.value;
     //formatting the date entry - Formatage de saisie de date
@@ -76,29 +150,29 @@ class GridPage2 extends Component {
       let calculAnnee = valDate.substr(6, 4);
       this.calculDate = calculAnnee + "-" + calculMois + "-" + calculJour;
       if (nameDate == "arrivee") {
-        this.arrivalDate = this.calculDate;
+        this.dateArrivee = this.calculDate;
       } else if (nameDate == "depart") {
-        this.departureDate = this.calculDate;
+        this.dateDepart = this.calculDate;
       }
       //dates formatting - Formatage des dates
-      if (this.arrivalDate != 0 && this.departureDate != 0) {
-        this.calculNight(e, this.arrivalDate, this.departureDate);
+      if (this.dateArrivee != 0 && this.dateDepart != 0) {
+        this.calculnuit(e, this.dateArrivee, this.dateDepart);
       }
     }
   };
 
-  /*calculation of the number of nights - Calcul du nombre de nuits*/
-  calculNight = (e, dateA, dateB) => {
+  /*calculation of the number of nuits - Calcul du nombre de nuits*/
+  calculnuit = (e, dateA, dateB) => {
     let date1 = new Date(dateA);
     let date2 = new Date(dateB);
     let diff = this.dateDiff(date1, date2);
-    let nNight = diff.day;
-    if (nNight < 0) {
+    let nnuit = diff.day;
+    if (nnuit < 0) {
       alert("Attention, la date de départ est inférieure à la date d'arrivée");
       e.target.value = "";
     } else {
-      this.state.night = nNight;
-      this.setState({ night: nNight });
+      this.state.nuit = nnuit;
+      this.setState({ nuit: nnuit });
       this.coast();
     }
   };
@@ -122,41 +196,41 @@ class GridPage2 extends Component {
     return diff;
   };
   /*
-  /*calculation of the number of travelers
+  /*calculation of the number of voyageurs
   /*calcul du nombre de voyageurs
   */
-  nTraveler = (e) => {
-    let n = this.state.traveler;
+  nvoyageur = (e) => {
+    let n = this.state.voyageur;
     if (e.target.name == "plus" && n < 6) {
       n++;
     } else if (e.target.name == "moins" && n > 1) {
       n--;
     }
-    this.state.traveler = n;
-    this.setState({ traveler: n });
+    this.state.voyageur = n;
+    this.setState({ voyageur: n });
     this.coast();
   };
   /*
-  /*calculate total cost overnight
+  /*calculate total cost overnuit
   /*calcul le cout total nuité 
   */
   coast = () => {
     //Calcul du prix chambre * nombre de nuit
-    let cout1 = this.initPrice * this.state.night;
-    this.state.overnightTotalCoast = cout1;
-    this.setState({ overnightTotalCoast: cout1 });
+    let cout1 = this.state.initPrix * this.state.nuit;
+    this.state.totalNuite = cout1;
+    this.setState({ totalNuite: cout1 });
     //Calcul du prix ménage * nombre de nuit
-    let cout2 = this.initCleaning * this.state.night;
-    this.state.cleaning = cout2;
-    this.setState({ cleaning: cout2 });
+    let cout2 = this.state.initMenage * this.state.nuit;
+    this.state.menage = cout2;
+    this.setState({ menage: cout2 });
     //Calcul du prix service * nombre de nuit
-    let cout3 = this.initService * this.state.night;
+    let cout3 = this.state.initService * this.state.nuit;
     this.state.service = cout3;
     this.setState({ service: cout3 });
     //Calcul du prix service * nombre de nuit
-    let cout4 = this.InitTouristTax * this.state.night * this.state.traveler;
-    this.state.touristTax = cout4;
-    this.setState({ touristTax: cout4 });
+    let cout4 = this.state.initTaxe * this.state.nuit * this.state.voyageur;
+    this.state.taxe = cout4;
+    this.setState({ taxe: cout4 });
     //Calcul global
     let cout5 = cout1 + cout2 + cout3 + cout4;
     this.state.total = cout5;
@@ -172,7 +246,7 @@ class GridPage2 extends Component {
         <Container className="container1Grid2">
           <Row className="cont1Row0Grid2">
             <Col className="cont1Row0Col1Grid2">
-              <span className="spanPrix">{this.initPrice}€</span>
+              <span className="spanPrix">{this.state.initPrix}€</span>
               <span>/ nuit</span>
             </Col>
           </Row>
@@ -183,12 +257,12 @@ class GridPage2 extends Component {
               </label>
 
               <input
-                className="InputGrid2 arrivalDate"
+                className="InputGrid2 dateArrivee"
                 type="text"
                 name="arrivee"
                 placeholder="jj/mm/aaaa"
                 maxlength="10"
-                onChange={this.getNight}
+                onChange={this.getnuit}
               ></input>
             </Col>
             <Col className="cont1Row1Col2Grid2">
@@ -201,7 +275,7 @@ class GridPage2 extends Component {
                 name="depart"
                 placeholder="jj/mm/aaaa"
                 maxlength="10"
-                onChange={this.getNight}
+                onChange={this.getnuit}
               ></input>
             </Col>
           </Row>
@@ -215,16 +289,16 @@ class GridPage2 extends Component {
               <Button
                 className="ButtonPlusMoins"
                 name="plus"
-                onClick={this.nTraveler}
+                onClick={this.nvoyageur}
                 variant="light"
               >
                 +
               </Button>
-              <div className="plusMoins">{this.state.traveler}</div>
+              <div className="plusMoins">{this.state.voyageur}</div>
               <Button
                 className="ButtonPlusMoins"
                 name="moins"
-                onClick={this.nTraveler}
+                onClick={this.nvoyageur}
                 variant="light"
               >
                 -
@@ -233,11 +307,11 @@ class GridPage2 extends Component {
           </Row>
           <Row className="cont1Row3Grid2">
             <Col xs={6} className="cont1Row3Col1Grid2">
-              <span>{this.initPrice}€</span>
-              <span> x {this.state.night} nuit(s) :</span>
+              <span>{this.state.initPrix}€</span>
+              <span> x {this.state.nuit} nuit(s) :</span>
             </Col>
             <Col className="cont1Row3Col2Grid2">
-              <span>{this.state.overnightTotalCoast}€</span>
+              <span>{this.state.totalNuite}€</span>
             </Col>
           </Row>
           <Row className="cont1Row4Grid2">
@@ -247,7 +321,7 @@ class GridPage2 extends Component {
               </span>
             </Col>
             <Col className="cont1Row4Col2Grid2">
-              <span>{this.state.cleaning}€</span>
+              <span>{this.state.menage}€</span>
             </Col>
           </Row>
           <Row className="cont1Row5Grid2">
@@ -267,7 +341,7 @@ class GridPage2 extends Component {
               </span>
             </Col>
             <Col className="cont1Row6Col2Grid2">
-              <span>{this.state.touristTax}€</span>
+              <span>{this.state.taxe}€</span>
             </Col>
           </Row>
           <Row className="cont1Row7Grid2"></Row>
@@ -281,7 +355,7 @@ class GridPage2 extends Component {
           </Row>
           <Row className="cont1Row9Grid2">
             <Col className="cont1Row9Col1Grid2">
-              <BoutonPage2 />
+              <BoutonPage2 propsClick={this.envoiFormulaire} />
             </Col>
           </Row>
         </Container>

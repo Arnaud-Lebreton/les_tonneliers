@@ -1,28 +1,58 @@
+/*
+ * Affichage du formulaire de contact - Page1
+ */
+
 import React, { Component } from "react";
 import "./styleContact.css";
-import { Row, Col } from "react-bootstrap";
-import BoutonPage1 from "../../assets/boutons/BoutonPage1";
+import { Col } from "react-bootstrap";
+import BoutonMap from "../../assets/boutons/BoutonMap";
 
 class Contact extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstname: "",
-      lastname: "",
+      prenom: "",
+      nom: "",
       email: "",
-      phone: "",
+      tel: "",
       message: "",
     };
   }
-
+  // Récupération des informations saisies par l'utilisateur
   handleInput = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  data = () => {
-    for (let property in this.state) {
-      console.log(property + ":" + this.state[property]);
-    }
+  // Envoi des données du formulaire
+  envoiFormulaire = (e) => {
+    e.preventDefault(); //Pour empecher de rafraichir la page
+    // Créer le body à envoyer
+    const body = {
+      nom: this.state.nom,
+      prenom: this.state.prenom,
+      email: this.state.email,
+      tel: this.state.tel,
+      message: this.state.message,
+    };
+
+    //Configuration de la requete
+    const options = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      mode: "cors",
+      body: JSON.stringify(body),
+    };
+    //Envoie de la requete
+    fetch("http://localhost:8080/connexion/formulaire", options)
+      .then((response) => response.json())
+      .then(
+        (data) => {
+          alert("Votre message a été pris en compte, merci");
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
   };
 
   render() {
@@ -31,19 +61,19 @@ class Contact extends Component {
         <Col>
           <h2>Nous Contacter</h2>
           <form className="formulaire">
-            <label for="firstname">Prénom</label>
+            <label for="prenom">Prénom</label>
             <input
               type="text"
-              id="firstname"
-              name="firstname"
+              id="prenom"
+              name="prenom"
               placeholder="Entrer votre Prénom..."
               onChange={this.handleInput}
             ></input>
-            <label for="lastname">Nom</label>
+            <label for="nom">Nom</label>
             <input
               type="text"
-              id="lastname"
-              name="lastname"
+              id="nom"
+              name="nom"
               placeholder="Entrer votre Nom..."
               onChange={this.handleInput}
             ></input>
@@ -55,22 +85,22 @@ class Contact extends Component {
               placeholder="Entrer votre Mail..."
               onChange={this.handleInput}
             ></input>
-            <label for="phone">Tel</label>
+            <label for="tel">Tel</label>
             <input
               type="tel"
-              id="phone"
-              name="phone"
-              placeholder="Entrer votre N° de Téléphone..."
+              id="tel"
+              name="tel"
+              placeholder="Entrer votre N° de Télétel..."
               onChange={this.handleInput}
             ></input>
-            <label for="lastname">Votre Message</label>
+            <label for="nom">Votre Message</label>
             <textarea
               id="message"
               name="message"
               placeholder="Entrer votre Message..."
               onChange={this.handleInput}
             ></textarea>
-            <a href id="link" onClick={this.data}>
+            <a href id="link" onClick={this.envoiFormulaire}>
               Envoyer
             </a>
           </form>
@@ -80,7 +110,7 @@ class Contact extends Component {
           <br />
           <p>
             Pour réserver un de nos appartements, contactez nous directement par
-            Téléphone ou via le formulaire
+            Télétel ou via le formulaire
           </p>
           <p>
             Résidence Les Tonneliers
@@ -96,7 +126,7 @@ class Contact extends Component {
             href="https://www.google.com/maps/place/7+Rue+des+Tonneliers,+21200+Beaune/@47.0243942,4.837084,17z/data=!3m1!4b1!4m5!3m4!1s0x47f2f345f565f3ff:0x899fbdaa48d90ae4!8m2!3d47.0243942!4d4.8392727"
             target="blank"
           >
-            <BoutonPage1 button="Plan d'accès et Itinéraire" />
+            <BoutonMap button="Plan d'accès et Itinéraire" />
           </a>
           <img src="img/map_beaune.png" alt="map_beaune" />
         </Col>

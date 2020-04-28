@@ -1,3 +1,7 @@
+/*
+ * Affichage du pied de page - Page1-2
+ */
+
 import React, { Component } from "react";
 import "./styleFooter.css";
 import { Row, Col } from "react-bootstrap";

@@ -1,3 +1,7 @@
+/*
+ * Carrousel Page1 et Page2
+ */
+
 import React, { Component } from "react";
 import "./styleCarrouselPage1.css";
 import { Carousel } from "react-bootstrap";

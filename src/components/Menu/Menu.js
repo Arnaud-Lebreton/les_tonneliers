@@ -1,3 +1,8 @@
+/*
+ * Affichage de la barre de navigation - Page1-2
+ * A finir : - modal Historique / Beaune / concepte
+ */
+
 import React, { Component } from "react";
 import "./styleMenu.css";
 import { Nav, NavDropdown } from "react-bootstrap";
@@ -11,6 +16,7 @@ class Menu extends Component {
     };
   }
 
+  // Gestion de l'affichage de la fenêtre modal
   changeShow = () => {
     this.setState({ show_login: true });
   };
@@ -44,9 +50,6 @@ class Menu extends Component {
             <Nav.Link href="#form" eventKey="link-2">
               Contact
             </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="language">Fr/En</Nav.Link>
           </Nav.Item>
         </Nav>
       </div>

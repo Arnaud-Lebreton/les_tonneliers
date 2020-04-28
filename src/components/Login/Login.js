@@ -1,3 +1,7 @@
+/*
+ * Affichage du modal de connexion - A finir ==> données sécurisées
+ */
+
 import React, { Component } from "react";
 import "./styleLogin.css";
 import { Modal, Button, Nav } from "react-bootstrap";
@@ -7,9 +11,34 @@ class Login extends Component {
     super(props);
     this.state = {
       close: false,
+      email: "",
+      password: "",
     };
   }
+  // Récupération des données saisies
+  handleInput = (e) => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
+  getLoggin = () => {
+    const options = {
+      method: "GET",
+      headers: { "Content-type": "application/json" },
+      mode: "cors",
+    };
+    fetch("http://localhost:8080/connexion", options)
+      .then((res) => res.json())
+      .then(
+        (data) => {
+          console.log(data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+  };
+
+  // ouverture et Fermeture de la fenêtre Modal
   changeclose = () => {
     this.setState({ close: !this.state.close });
   };
@@ -33,6 +62,7 @@ class Login extends Component {
                 id="email"
                 name="email"
                 placeholder="Entrer votre Mail..."
+                onChange={this.handleInput}
               ></input>
               <label for="password">Password</label>
               <input
@@ -40,6 +70,7 @@ class Login extends Component {
                 id="password"
                 name="password"
                 placeholder="Mot de passe..."
+                onChange={this.handleInput}
               ></input>
               <p>
                 Mot de passe <a href="">oublié</a>
@@ -54,7 +85,7 @@ class Login extends Component {
             <Button onClick={this.changeclose} variant="secondary">
               Close
             </Button>
-            <Button>Connexion</Button>
+            <Button onClick={this.getLoggin}>Connexion</Button>
           </Modal.Footer>
         </Modal>
       </div>

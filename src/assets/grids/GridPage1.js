@@ -1,3 +1,7 @@
+/*
+ * Affichage Caroussel + descriptif (détailPage1)- Page1
+ */
+
 import React, { Component } from "react";
 import "./styleGridPage1.css";
 import CarrouselPage1 from "../../assets/caroussel/CarrouselPage1";
@@ -22,12 +26,13 @@ class GridPage1 extends Component {
                 propsImg3={this.props.propsImg3}
               />
             </Col>
-            <Col className=" colGrid propsNote propsTiltle propsDescription propsCharacteristics ">
+            <Col className=" colGrid propsNote propsTiltle propsDescription propsCharacteristics propsIdAppartement">
               <DetailPage1
                 propsNote={this.props.propsNote}
                 propsTiltle={this.props.propsTiltle}
                 propsDescription={this.props.propsDescription}
                 propsCharacteristics={this.props.propsCharacteristics}
+                propsIdAppartement={this.props.propsIdAppartement}
               />
             </Col>
           </Row>

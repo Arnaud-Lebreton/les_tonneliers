@@ -1,3 +1,7 @@
+/*
+ * Affichage de la partie centrale - Page1
+ */
+
 import React, { Component } from "react";
 import "./styleBodyPage1.css";
 import GridPage1 from "../../assets/grids/GridPage1";
@@ -12,10 +16,10 @@ class BodyPage1 extends Component {
   }
   // Appel aux données
   componentDidMount() {
-    //le 1er affichage de la page
     this.getAppartement();
   }
 
+  //Récupération des données collection Appartement
   getAppartement = () => {
     const options = {
       method: "GET",
@@ -34,6 +38,7 @@ class BodyPage1 extends Component {
       );
   };
 
+  //Boucle d'affichage carrousel + descriptif
   afficherGrid = () => {
     return this.state.dataAppartement.map((element, index) => (
       <GridPage1
@@ -45,6 +50,7 @@ class BodyPage1 extends Component {
         propsTiltle={element.nomApp}
         propsDescription={element.descPage1App}
         propsCharacteristics={element.caracApp}
+        propsIdAppartement={element._id}
       />
     ));
   };

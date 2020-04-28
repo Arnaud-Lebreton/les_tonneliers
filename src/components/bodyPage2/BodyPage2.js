@@ -1,3 +1,8 @@
+/*
+ * Affichage de la partie centrale - Page2
+ * Assemblage détail appartement + réservation
+ */
+
 import React, { Component } from "react";
 import "./styleBodyPage2.css";
 import GridPage2 from "../../assets/grids/GridPage2";
@@ -14,8 +19,8 @@ class BodyPage2 extends Component {
     return (
       <div>
         <div className="bodyPage2">
-          <GridDetails idAppartement={this.props.match.params.id} />
-          <GridPage2 />
+          <GridDetails propsIdAppartement={this.props.match.params.id} />
+          <GridPage2 propsIdReservation={this.props.match.params.id} />
         </div>
         <div className="apartmentlink">
           <ApartmentLink />

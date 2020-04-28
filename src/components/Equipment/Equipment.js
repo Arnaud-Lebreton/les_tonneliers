@@ -1,3 +1,8 @@
+/*
+ * Affichage des équipements - Page2
+ * A finir : Faire une boucle d'affichage pour les li
+ */
+
 import React, { Component } from "react";
 import "./styleEquipment.css";
 import { Col } from "react-bootstrap";
@@ -15,24 +20,21 @@ class Equipment extends Component {
             <h3>Les Equipements</h3>
           </Col>
         </div>
-        <div className="equipment_details">
+        <div className="equipment_details propsEquipement">
           <Col>
             <ul>
-              <li>
-                Lit Queen Size (160cm) avec matelas et sur-matelas de qualité «
-                Palace »
-              </li>
-              <li>Double vitrage, volets, rideaux</li>
-              <li>Baignoire, linge de bain, peignoirs, kit de bien-être bio</li>
-              <li>Terrasse privative paysagée de 25m² avec salon de jardin</li>
+              <li>{this.props.propsEquipement[0]}</li>
+              <li>{this.props.propsEquipement[1]}</li>
+              <li>{this.props.propsEquipement[2]}</li>
+              <li>{this.props.propsEquipement[3]}</li>
             </ul>
           </Col>
           <Col>
             <ul>
-              <li>Spa privatif extérieur sur terrasse</li>
-              <li>Enceinte Bluetooth</li>
-              <li>Accès Internet en Wifi gratuit</li>
-              <li>Parking gratuit devant la résidence</li>
+              <li>{this.props.propsEquipement[4]}</li>
+              <li>{this.props.propsEquipement[5]}</li>
+              <li>{this.props.propsEquipement[6]}</li>
+              <li>{this.props.propsEquipement[7]}</li>
             </ul>
           </Col>
         </div>
