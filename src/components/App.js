@@ -11,6 +11,7 @@ import Footer from "./Footer/Footer";
 import {} from "react-bootstrap";
 import BodyPage1 from "../components/bodyPage1/BodyPage1";
 import BodyPage2 from "../components/bodyPage2/BodyPage2";
+import BodyPage3 from "../components/bodyPage2/BodyPage3";
 
 class App extends Component {
   constructor(props) {
@@ -28,6 +29,9 @@ class App extends Component {
               <BodyPage1 />
             </Route>
             <Route path="/page2/:id" component={BodyPage2} />
+            <Route path="/page3">
+              <BodyPage3 />
+            </Route>
           </Switch>
         </div>
         <Footer />

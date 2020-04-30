@@ -20,13 +20,21 @@ class Login extends Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  getLoggin = () => {
+  //Contrôle du login hach
+  postLoggin = () => {
+    const body = {
+      email: this.state.email,
+      password: this.state.password,
+    };
+
     const options = {
-      method: "GET",
+      method: "POST",
       headers: { "Content-type": "application/json" },
       mode: "cors",
+      body: JSON.stringify(body),
     };
-    fetch("http://localhost:8080/connexion", options)
+
+    fetch("http://localhost:8080/login", options)
       .then((res) => res.json())
       .then(
         (data) => {
